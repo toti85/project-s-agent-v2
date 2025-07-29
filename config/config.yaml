@@ -1,0 +1,54 @@
+# Project-S Configuration
+
+# System settings
+system:
+  name: "Project-S Agent"
+  version: "0.1.0"
+  log_level: "INFO"
+
+# Model settings
+models:
+  # Qwen settings
+  qwen:
+    enabled: true
+    subprocess_path: "path/to/qwen/executable"  # Adjust to your system
+    
+  # Ollama settings
+  ollama:
+    enabled: true
+    host: "http://localhost:11434"
+    models:
+      - "llama3"
+      - "codellama"
+      
+  # llama.cpp settings
+  llamacpp:
+    enabled: false  # Set to true when configured
+    model_path: "/path/to/your/model.gguf"  # Adjust to your system
+    server_port: 8080
+    n_ctx: 2048
+    n_threads: 4
+
+# Interface settings
+interfaces:
+  dom_listener:
+    enabled: true
+    polling_interval: 1  # seconds
+    
+  vscode:
+    enabled: true
+
+# Task affinities - which models are good at which tasks
+task_affinities:
+  code:
+    - "qwen"
+    - "codellama"
+  reasoning:
+    - "qwen"
+    - "llama3"
+  creativity:
+    - "qwen"
+    - "llama3"
+  factual:
+    - "qwen"
+    - "llama3"

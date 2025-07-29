@@ -1,0 +1,41 @@
+{
+  "max_concurrent_tasks": 10,
+  "scheduler_interval": 1.0,
+  "priority_limits": {
+    "critical": {
+      "cpu_percent": 80.0,
+      "memory_mb": 19256.177343749998,
+      "disk_io_mb_per_sec": 80.0,
+      "network_io_mb_per_sec": 8.0,
+      "max_duration_seconds": null
+    },
+    "high": {
+      "cpu_percent": 60.0,
+      "memory_mb": 12837.4515625,
+      "disk_io_mb_per_sec": 60.0,
+      "network_io_mb_per_sec": 6.0,
+      "max_duration_seconds": null
+    },
+    "normal": {
+      "cpu_percent": 40.0,
+      "memory_mb": 9628.088671874999,
+      "disk_io_mb_per_sec": 40.0,
+      "network_io_mb_per_sec": 4.0,
+      "max_duration_seconds": null
+    },
+    "low": {
+      "cpu_percent": 20.0,
+      "memory_mb": 6418.72578125,
+      "disk_io_mb_per_sec": 20.0,
+      "network_io_mb_per_sec": 2.0,
+      "max_duration_seconds": null
+    },
+    "background": {
+      "cpu_percent": 10.0,
+      "memory_mb": 3209.362890625,
+      "disk_io_mb_per_sec": 10.0,
+      "network_io_mb_per_sec": 1.0,
+      "max_duration_seconds": null
+    }
+  }
+}

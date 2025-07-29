@@ -1,0 +1,106 @@
+# AI Modell Konfigurációk
+# A Project-S többmodelles rendszerének konfigurációs fájlja
+
+# OpenAI modellek
+openai:
+  enabled: true
+  models:
+    gpt-4:
+      name: "GPT-4"
+      description: "Erős, általános célú modell komplex feladatokhoz és tervezéshez"
+      context_length: 8192
+      strengths: ["tervezés", "okfejtés", "komplex gondolkodás", "dokumentáció"]
+      cost_tier: "high"
+      default_temperature: 0.7
+    gpt-3.5-turbo:
+      name: "GPT-3.5 Turbo"
+      description: "Gyors, általános célú modell egyszerűbb feladatokhoz"
+      context_length: 4096
+      strengths: ["gyors válasz", "általános kérdések", "egyszerű kódolás"]
+      cost_tier: "low"
+      default_temperature: 0.7
+
+# Anthropic modellek
+anthropic:
+  enabled: true
+  models:
+    claude-3-opus:
+      name: "Claude 3 Opus"
+      description: "Anthropic nagy teljesítményű modellje összetett feladatokhoz"
+      context_length: 100000
+      strengths: ["hosszú kontextus", "kódírás", "részletes elemzés"]
+      cost_tier: "high"
+      default_temperature: 0.5
+    claude-3-sonnet:
+      name: "Claude 3 Sonnet"
+      description: "Anthropic kiegyensúlyozott modellje"
+      context_length: 100000
+      strengths: ["kiegyensúlyozott teljesítmény", "kódírás", "elemzés"]
+      cost_tier: "medium"
+      default_temperature: 0.5
+
+# Helyi (Ollama) modellek
+ollama:
+  enabled: true
+  endpoint: "http://localhost:11434/api"
+  models:
+    llama3:
+      name: "Llama 3"
+      description: "Helyi Llama 3 modell ollama-n keresztül"
+      context_length: 4096
+      strengths: ["helyi futtatás", "privát adatok", "gyors válaszidő"]
+      cost_tier: "free"
+      default_temperature: 0.8
+    mistral:
+      name: "Mistral"
+      description: "Helyi Mistral modell ollama-n keresztül"
+      context_length: 8192
+      strengths: ["helyi futtatás", "hosszabb kontextus", "hatékony feldolgozás"]
+      cost_tier: "free"
+      default_temperature: 0.7
+
+# OpenRouter integráció (további modellek eléréséhez)
+openrouter:
+  enabled: true
+  models:
+    deepseek-v3:
+      name: "DeepSeek V3"
+      description: "DeepSeek V3 modell - specializált kódolásra és fejlesztésre"
+      context_length: 32768
+      strengths: ["kódolás", "programozás", "fejlesztés", "debugging", "költséghatékony"]
+      cost_tier: "low"
+      default_temperature: 0.1
+      model_id: "deepseek/deepseek-chat"
+    qwen:
+      name: "Qwen 72B"
+      description: "Nagy kapacitású és sokoldalú Qwen modell külső API-n keresztül"
+      context_length: 32768
+      strengths: ["hosszú kontextus", "elérhető ár", "nagy nyelvi kapacitás"]
+      cost_tier: "medium"
+      default_temperature: 0.7
+    yi:
+      name: "Yi 34B"
+      description: "Kiváló minőségű Yi modell külső API-n keresztül"
+      context_length: 16384
+      strengths: ["teljesítmény", "sokoldalúság", "jó kódolás"]
+      cost_tier: "medium" 
+      default_temperature: 0.7
+
+# Feladat típusokhoz javasolt modellek
+task_model_mapping:
+  tervezés: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-4", "claude-3-opus"]
+  kódolás: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "claude-3-opus", "claude-3-sonnet", "gpt-4"]
+  programming: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "claude-3-opus", "claude-3-sonnet", "gpt-4"]
+  coding: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "claude-3-opus", "claude-3-sonnet", "gpt-4"]
+  general: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-4", "claude-3-opus"]
+  default: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-4", "claude-3-opus"]
+  dokumentáció: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-4", "claude-3-sonnet"]
+  adatelemzés: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "claude-3-opus", "gpt-4"]
+  kreatív_írás: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "claude-3-opus", "gpt-4"]
+  fordítás: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-3.5-turbo", "llama3"]
+  összefoglalás: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-3.5-turbo", "claude-3-sonnet"]
+  gyors_válasz: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "gpt-3.5-turbo", "mistral", "llama3"]
+  privát_adatfeldolgozás: ["tngtech/deepseek-r1t2-chimera:free", "deepseek-v3", "llama3", "mistral"]
+
+# Alapértelmezett modell
+default_model: "tngtech/deepseek-r1t2-chimera:free"

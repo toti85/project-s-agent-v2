@@ -1,0 +1,45 @@
+# Project-S V2 Agent Requirements
+
+# Core AI & ML
+openai>=1.30.0
+anthropic>=0.25.0
+requests>=2.31.0
+aiohttp>=3.9.0
+
+# Browser automation
+playwright>=1.40.0
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# Web scraping
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Data processing
+pandas>=2.1.0
+numpy>=1.24.0
+pydantic>=2.5.0
+
+# Database & Storage
+sqlite3  # Built-in
+json  # Built-in
+
+# System & Performance
+psutil>=5.9.0
+asyncio  # Built-in
+multiprocessing  # Built-in
+
+# Environment & Config
+python-dotenv>=1.0.0
+pyyaml>=6.0
+
+# Development & Testing (optional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Optional GUI (for interactive features)
+tkinter  # Built-in on most systems
+
+# AI Model Support
+# OpenRouter API support through requests
+# DeepSeek API support through requests

@@ -1,0 +1,99 @@
+[
+  {
+    "id": "high_memory_usage",
+    "conditions": {
+      "memory_percent": {
+        "min": 80
+      }
+    },
+    "recommendation": {
+      "category": "memory",
+      "priority": "high",
+      "title": "High Memory Usage Detected",
+      "description": "Memory usage is consistently high. Consider optimizing memory-intensive processes or adding more RAM.",
+      "expected_impact": "Improved system responsiveness and reduced swapping",
+      "implementation_effort": "moderate",
+      "estimated_savings": {
+        "memory": 15.0
+      }
+    }
+  },
+  {
+    "id": "high_cpu_usage",
+    "conditions": {
+      "cpu_percent": {
+        "min": 75
+      }
+    },
+    "recommendation": {
+      "category": "cpu",
+      "priority": "high",
+      "title": "High CPU Usage Detected",
+      "description": "CPU usage is consistently high. Consider optimizing CPU-intensive tasks or distributing load.",
+      "expected_impact": "Improved system performance and reduced processing delays",
+      "implementation_effort": "moderate",
+      "estimated_savings": {
+        "cpu": 20.0
+      }
+    }
+  },
+  {
+    "id": "disk_space_warning",
+    "conditions": {
+      "disk_percent": {
+        "min": 85
+      }
+    },
+    "recommendation": {
+      "category": "disk",
+      "priority": "critical",
+      "title": "Low Disk Space Warning",
+      "description": "Disk space is running low. Clean up unnecessary files or expand storage capacity.",
+      "expected_impact": "Prevent system crashes and maintain performance",
+      "implementation_effort": "easy",
+      "estimated_savings": {
+        "disk": 25.0
+      }
+    }
+  },
+  {
+    "id": "memory_leak_detection",
+    "conditions": {
+      "memory_trend": "increasing",
+      "memory_growth_rate": {
+        "min": 5.0
+      }
+    },
+    "recommendation": {
+      "category": "memory",
+      "priority": "critical",
+      "title": "Potential Memory Leak Detected",
+      "description": "Memory usage is steadily increasing, indicating a potential memory leak. Investigate and fix memory leaks in applications.",
+      "expected_impact": "Prevent system crashes and maintain stability",
+      "implementation_effort": "complex",
+      "estimated_savings": {
+        "memory": 30.0
+      }
+    }
+  },
+  {
+    "id": "swap_usage_optimization",
+    "conditions": {
+      "swap_percent": {
+        "min": 25
+      }
+    },
+    "recommendation": {
+      "category": "memory",
+      "priority": "medium",
+      "title": "High Swap Usage",
+      "description": "System is using swap memory frequently. Consider adding more RAM or optimizing memory usage.",
+      "expected_impact": "Reduced disk I/O and improved performance",
+      "implementation_effort": "moderate",
+      "estimated_savings": {
+        "memory": 20.0,
+        "disk_io": 15.0
+      }
+    }
+  }
+]
