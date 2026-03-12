@@ -1,0 +1,358 @@
+
+PROJECT-S
+AI Agent Rendszer — Kontextus Dokumentum
+Utolsó frissítés: 2026-03-12   |   Verzió: v0.4   |   Státusz: Aktív fejlesztés
+
+📌  HOGYAN HASZNÁLD:
+
+Dobd be ezt bármelyik AI-nak mielőtt Project-S-ről kezdesz dolgozni. Azonnali kontextus — nem kell mindent újra magyarázni.
+Kapcsolódó fájlok:  PROJECT_S_IDEA_LOG.docx  ·  PROJECT_S_EXTRACTION_PROMPT.docx
+
+
+0.  QUICK BRIEF  (5 perces kontextus)
+Project-S egy self-validating, self-correcting, evidence-based, multi-AI autonóm agent rendszer.
+
+Az iparág fő problémája: AI agentek rossz kódot generálnak, nem ellenőrzik magukat, nem tanulnak a hibákból.
+A Project-S value proposition: self-validating · self-correcting · evidence-based · multi-AI
+
+
+Fejlesztő
+Toti — solo developer, rendszergazda, Kárpátalja/Zakarpattia, Ukrajna
+
+
+Stack
+Python · VS Code · Copilot · Claude · ChatGPT · DeepSeek · Ollama · Docker · Playwright
+
+
+Jelenlegi fókusz
+Meta Controller + Self-Inspection Layer tervezés · HP szerver infrastruktúra
+
+
+Kapcsolódó fájlok
+PROJECT_S_IDEA_LOG.docx  |  PROJECT_S_EXTRACTION_PROMPT.docx
+
+
+1.  PROJEKT VÍZIÓ  (stabil — ritkán változik)
+1.1  Alapkoncepció
+Az AI modellek hagyományosan chat formában működnek — szöveget adnak, de nem cselekszenek. A Project-S ezt töri át: az AI agentként működik, feladatokat hajt végre, több modell együtt dönt, és a rendszer saját outputját folyamatosan validálja és korrigálja.
+
+Self-verifying · Self-correcting · Evidence-based · Multi-AI
+
+
+1.2  Value Proposition — Agent Stability Problem
+Az iparág problémája:
+
+AI agentek rossz kódot generálnak és nem ellenőrzik magukat
+Nem tanulnak a hibákból — ugyanazt a hibát ismételik
+Egyetlen modellre alapozás törékeny és megbízhatatlan
+
+A Project-S megoldása:
+
+Self-validating: minden output ellenőrzésre kerül
+Self-correcting: a rendszer önállóan javítja a hibákat
+Evidence-based: minden döntéshez bizonyíték generálódik
+Multi-AI: több modell együtt, egymást ellenőrizve
+
+
+2.  ARCHITEKTÚRA  (v0.4 — frissítve 2026-03-13)
+2.1  Háromrétegű Rendszer Architektúra
+A v0.3 frissítés bevezeti a harmadik réteget — a Self-Inspection Layer-t a Meta Layer fölé.
+
+Self-Inspection Layer  ◀ ÚJ
+(önanalízis, regresszió, teszt generálás)
+▼
+Meta Layer
+(validáció, evidence, strategy council)
+▼
+Core Layer
+(agent loop, workflow, execution engine)
+
+
+Core Layer  (végrehajtás)
+Komponens
+Státusz
+Leírás
+Agent Loop
+✅ Implementálva
+Fő végrehajtási ciklus
+Workflow Engine
+✅ Implementálva
+Komplex task orchestráció
+Decision Router
+✅ Implementálva
+Feladat-modell routing
+Execution Engine
+✅ Implementálva
+Akció végrehajtás, tool hívások
+Browser Automation
+✅ Implementálva
+Playwright alapú web vezérlés
+Tool Registry
+✅ Implementálva
+Plugin-szerű tool kezelés
+
+
+Meta Layer  (validáció és felügyelet)
+Komponens
+Státusz
+Leírás
+Strategy Council
+✅ Implementálva
+Több AI dönt egy tervről
+Execution Validator
+✅ Implementálva
+Output validáció, evidence generálás
+Meta Controller
+🔄 Fejlesztés alatt
+Goal→Plan→Execute→Replan ciklus
+Evidence-based Learning
+✅ Működik
+Hibák logolása → evidence → következő döntés módosítása
+Execution Sandbox
+❌ Tervezett
+Izolált AI kód futtatás: sandbox→tests→validator→exec
+
+
+Self-Inspection Layer  (ÚJ — v0.3)
+Ez a harmadik, legfelső réteg. A rendszer nem csak végrehajt és validál — önmagát is folyamatosan elemzi.
+
+
+Komponens
+Státusz
+Leírás
+Futás Monitor
+❌ Tervezett
+Minden futás real-time megfigyelése
+Kód Minőség Ellenőrző
+❌ Tervezett
+Generált kód automatikus quality check
+Regresszió Detektor
+❌ Tervezett
+Korábbi futásokhoz képest visszalépés észlelése
+Auto Teszt Generátor
+❌ Tervezett
+Hibákból automatikusan generált tesztek
+Agent Failure Analyzer
+❌ Tervezett
+Hiba típus klasszifikáció: prompt/planning/model/execution
+
+
+2.2  Multi-AI Modell Stratégia  (bővítve v0.3)
+Model Routing — dinamikus modell választás
+A rendszer nem egy fix AI-t használ — feladat komplexitása alapján dinamikusan választ, cost-optimalizáltan:
+
+Local LLM (Ollama / Qwen3)
+Olcsó, offline, gyors
+↓  ha nem elég jó
+Cheap API Model (OpenRouter)
+Közepes feladatok, alacsony cost
+↓  ha nem elég jó
+Premium Model (Claude / GPT-4)
+Komplex reasoning, kritikus döntések
+
+
+Specializált Agent Szerepek
+Nem minden AI csinál mindent — specializált szerepek az Agent Council-ban:
+
+Szerepkör
+Feladata
+Tipikus modell
+Planner AI
+Terv készítése, decomposition
+ChatGPT / Claude
+Coder AI
+Kód generálás, implementáció
+Copilot / DeepSeek
+Validator AI
+Output ellenőrzés, evidence
+Claude
+Critic AI
+Hibák, gyenge pontok keresése
+Claude / ChatGPT
+Security AI
+Biztonsági review (bounty)
+Claude
+
+
+Agent Council Szavazás
+Minden fontos döntésnél több AI modell szavaz egymástól függetlenül
+Szavazás: majority vote + confidence score alapján
+Ellentétes válaszoknál: escalation a premium modellhez
+
+2.3  Tech Stack + Hardware
+Kategória
+Részlet
+Backend
+Python — fő fejlesztési nyelv
+Fejlesztői env
+VS Code + GitHub Copilot
+Verziókezelés
+GitHub
+Containerizáció
+Docker — agent worker-ek futtatása
+Hardware
+HP ProLiant DL380 Gen9 — lokális LLM node + agent node + worker node
+OS
+Ubuntu Server
+Browser auto
+Playwright
+Lokális LLM
+Ollama (Qwen3, egyéb modellek)
+API routing
+OpenRouter — közepes feladatokhoz cost-optimalizáltan
+
+
+3.  AKTUÁLIS ÁLLAPOT  (hetente frissítendő)
+3.1  Mi működik most
+Agent execution loop-ok futnak és logolnak
+Evidence-based learning: hibák logolása → evidence generálás → következő döntés módosítása
+Strategy Council + Execution Validator operacionális
+Browser automation (Playwright) működik
+Multi-model orchestráció: Claude, ChatGPT, Copilot, DeepSeek, Ollama
+
+3.2  Min dolgozunk most
+BlackBox Guardrail System — evidence_score < 0.9 → AMBIGUOUS (safety first)
+LM Studio PoC — HP ProLiant + Tesla M60 lokális inference szerver
+Pattern Learning Library — CLOSED threat vector → auto-save pattern
+Meta Controller — Goal→Plan→Execute→Replan ciklus
+
+3.3  Következő 3 lépés  (frissítve 2026-03-13)
+BlackBox Guardrail implementálása — evidence_score ≥ 0.9, safety first
+LM Studio PoC — Qwen2.5-14B lokálisan, OpenAI-kompatibilis endpoint
+Pattern Learning Library — failure → protection pattern automatizálás
+
+3.4  Új komponensek tervezés alatt  (2026-03-13)
+Komponens
+Státusz
+Leírás
+BlackBox Guardrail System
+🔄 Fejlesztés alatt
+evidence_score < 0.9 → AMBIGUOUS; Google 'black box' tanulság → safety first
+Hybrid Model Manager
+🔄 Tervezés
+Lokális (LM Studio/Qwen2.5) + Cloud (Claude/GPT) kombináció; 60% gyorsabb, 70% olcsóbb
+Pattern Learning Library
+🔄 Tervezés
+CLOSED threat vector → auto-save protection pattern; korai figyelmeztető rendszer
+Risk Budget Manager
+🔄 Tervezés
+Max 10h/target; AMBIGUOUS ratio > 40% → STOP signal; prevent vakvágány kutatást
+
+
+4.  DÖNTÉSI NAPLÓ
+Ha egy döntés itt nincs, a modell nem tud róla és rossz irányba javasolhat. Minden fontosabb döntés ide kerül.
+
+
+Dátum
+Döntés
+Indok / Kontextus
+2024-02
+Python mint fő backend nyelv
+AI library ecosystem, Copilot integráció
+2025-xx
+Redundáns engine-ek eltávolítása
+Gyorsabb startup, kisebb memóriaigény
+2025-xx
+NEM követi az OpenDevin architektúrát
+Saját agent struktúra — rugalmasabb, célra szabottabb
+2025-xx
+Meta Layer kötelező minden AI outputra
+Megbízhatatlan AI output validáció nélkül nem mehet production-be
+2025-xx
+Multi-AI stratégia — nem egyetlen modell
+Egy modell sem megbízható önmagában; erősségeik kombinálva jobbak
+2026-03
+Háromrétegű architektúra (Core+Meta+Self-Inspection)
+Self-Inspection layer szükséges a stabil agent problémához (ChatGPT session)
+2026-03
+Model routing: local→cheap API→premium
+Cost-optimalizáció; nem minden feladat igényli a drága modellt
+2026-03
+Specializált agent szerepkörök a Council-ban
+Planner/Coder/Validator/Critic/Security — hatékonyabb mint általános agentek
+2026-03-13
+BlackBox Guardrail kötelező (evidence_score ≥ 0.9)
+Google 'AI does things we don't understand' tanulság — safety first, nem bizonyítható döntés nem fut
+2026-03-13
+Hybrid Model Manager: local + cloud
+LM Studio lokálisan bulk műveletekre; cloud csak kritikus döntésekre — 70% cost reduction várható
+2026-03-13
+Risk Budget: max 10h/target, 40% AMBIGUOUS → STOP
+Prevent vakvágány kutatás; ROI védelem; automatikus pivot kényszer
+2026-03-13
+Pattern Library: CLOSED TV → auto-pattern mentés
+Quick win + Evidence Graph alapja; csökkenti redundáns kutatási időt
+
+
+5.  MONETIZÁCIÓ & STRATÉGIA
+5.1  Aktív bevételi irányok
+Csatorna
+Platform
+Cél / Megjegyzés
+Airdrop Farming
+Monad mainnet + egyéb L2
+Docker workers HP szerveren, párhuzamos wallets
+Freelance Automation
+Upwork / Fiverr
+AI workflow engineer — Project-S brand
+Open Source Bounty
+Algora · GitHub Sponsors
+Nyílt forráskódú kontribúció
+
+
+5.2  Prioritási sorrend
+Airdrop Farming — passzív, párhuzamos, HP szerveren fut
+Freelance Automation — project-alapú, igény szerint
+
+5.3  Nyitott kérdések
+Mikor lesz production-ready az agent (Meta Controller + Self-Inspection nélkül nem az)?
+Melyik blockchain-t érdemes most farminolni — Monad mainnet elegendő?
+Model routing: OpenRouter-en melyik cheap modell a legjobb arány ár/minőség?
+
+6.  ÖTLETBANK  (részletek az IDEA_LOG-ban)
+Rövid összefoglaló. A teljes leírás, AI forrás és státusz: PROJECT_S_IDEA_LOG.docx
+
+
+6.1  Architektúra ötletek
+Self-Inspection Layer — háromrétegű arch. teteje  [→ IDEA_LOG #007]
+Agent Council — szavazásos döntéshozatal  [→ IDEA_LOG #002]
+Model Routing — local→cheap→premium dinamikus választás  [→ IDEA_LOG #008]
+Evidence Graph — futásokból tanuló gráf memória  [→ IDEA_LOG #003]
+Execution Sandbox — izolált kód futtatás  [→ IDEA_LOG #004]
+Agent Genome — evolúciós konfiguráció klónozás+mutáció  [→ IDEA_LOG #010]
+
+6.2  Feature ötletek
+Agent Failure Analyzer — hiba típus klasszifikáció  [→ IDEA_LOG #009]
+Self-debugging loop — auto debug teszt generálás  [→ IDEA_LOG #001]
+Strategy Evolution Engine — Plan A fail → Strategy mutation → Plan B  [→ IDEA_LOG #011]
+AI test generation — futásokból automatikus tesztek  [→ IDEA_LOG]
+
+6.3  Üzleti ötletek
+White-label Project-S kis cégeknek — revenue-sharing modell
+AI security research engine — automatizált bounty hunter platform
+
+6.4  Infrastructure ötletek  (ÚJ — 2026-03-13)
+LM Studio integráció — HP ProLiant + Tesla M60 lokális inference  [→ IDEA_LOG #012]
+Hikvision NVR → Project-S — 17 kamerás ISAPI + AI vision pipeline  [→ IDEA_LOG #013]
+
+7.  FRISSÍTÉSI NAPLÓ
+Dátum
+Ki frissítette
+Mit változtatott
+2026-03-12
+Claude + Toti
+v0.1 sablon létrehozva
+2026-03-12
+ChatGPT + Toti
+v0.2 — tartalom feltöltve: Meta Layer, döntési napló, monetizáció, ötletbank
+2026-03-12
+ChatGPT + Claude
+v0.3 — Self-Inspection Layer, model routing, agent szerepkörök, Agent Genome, Failure Analyzer, Strategy Evolution Engine
+2026-03-13
+Claude + Toti
+v0.4 — BlackBox Guardrail, Hybrid Model Manager, Pattern Learning Library, Risk Budget Manager, 6.4 Infrastructure, döntési napló 4 új bejegyzés, prioritások átrendezve
+
+
+
+Project-S Context Document  v0.4  |  Toti (solo dev, Kárpátalja)  |  Kapcsolódó: PROJECT_S_IDEA_LOG.docx · PROJECT_S_EXTRACTION_PROMPT.docx
+🔄  Élő dokumentum — frissítsd minden fontosabb döntés vagy mérföldkő után!
